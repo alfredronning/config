@@ -17,9 +17,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-utils/vim-man'
 Plug 'git@github.com:Valloric/YouCompleteMe.git'
 Plug 'mbbill/undotree'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
@@ -56,4 +56,9 @@ nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
 
 set shellcmdflag=-ic
+
+set completeopt-=preview
+
+:command Main :normal! iif __name__ == "__main__":<ESC>
+:command Open :normal! aopen("").read().strip().split("\n")<ESC>9b2l
 
