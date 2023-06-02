@@ -17,7 +17,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
-Plug 'git@github.com:Valloric/YouCompleteMe.git'
+Plug 'Valloric/YouCompleteMe'
 Plug 'mbbill/undotree'
 Plug 'rust-lang/rust.vim'
 
