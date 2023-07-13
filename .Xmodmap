@@ -1,0 +1,5 @@
+! bind dollar on shift-4
+keycode 13 = 4 dollar currency dollar currency
+! unbind capslock
+keycode 66 = 
+

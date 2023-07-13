@@ -116,47 +116,36 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#python aliases
-alias python='python3'
-alias pip='pip3'
-alias vact='source venv/bin/activate'
-
-#gatsby aliases
-alias gtsc='gatsby clean'
-alias gtsd='gatsby develop'
-alias gtsb='gatsby build'
-
-#starship setup
-eval "$(starship init bash)"
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/alfr/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/alfred/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/alfr/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/alfr/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/alfred/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/alfred/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/alfr/anaconda3/bin:$PATH"
+        export PATH="/home/alfred/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
 eval "$(thefuck --alias)"
+eval "$(starship init bash)"
 
-#aws variables
+#tools aliases
+alias rot13='python3 /home/alfred/Documents/repositories/tools/rot13.py'
+alias caesar='python3 /home/alfred/Documents/repositories/tools/caesar.py'
+alias hex2chr='python3 /home/alfred/Documents/repositories/tools/hex2chr.py'
+alias morse='python3 /home/alfred/Documents/repositories/tools/morse.py'
+alias vingenere='python3 /home/alfred/Documents/repositories/tools/vingenere.py'
+alias tools='python3 /home/alfred/Documents/repositories/tools/tools.py'
+
+#other aliases
+alias ghidra='/home/alfred/Documents/ghidra_10.3_PUBLIC/ghidraRun'
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-#tools aliases
-alias rot13='python3 /home/alfr/tools/rot13.py'
-alias caesar='python3 /home/alfr/tools/caesar.py'
-alias hex2chr='python3 /home/alfr/tools/hex2chr.py'
-alias morse='python3 /home/alfr/tools/morse.py'
-alias vingenere='python3 /home/alfr/tools/vingenere.py'
-alias tools='python3 /home/alfr/tools/tools.py'
-
