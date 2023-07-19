@@ -1,4 +1,4 @@
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="~/.oh-my-zsh"
 
 ZSH_THEME="simple"
 
@@ -17,14 +17,15 @@ alias la='ls -A'
 alias l='ls -CF'
 
 #tools aliases
-alias rot13='python3 /home/alfred/Documents/repositories/tools/rot13.py'
-alias caesar='python3 /home/alfred/Documents/repositories/tools/caesar.py'
-alias hex2chr='python3 /home/alfred/Documents/repositories/tools/hex2chr.py'
-alias morse='python3 /home/alfred/Documents/repositories/tools/morse.py'
-alias vingenere='python3 /home/alfred/Documents/repositories/tools/vingenere.py'
-alias tools='python3 /home/alfred/Documents/repositories/tools/tools.py'
+alias rot13='python3 ~/Documents/repositories/tools/rot13.py'
+alias caesar='python3 ~/Documents/repositories/tools/caesar.py'
+alias hex2chr='python3 ~/Documents/repositories/tools/hex2chr.py'
+alias morse='python3 ~/Documents/repositories/tools/morse.py'
+alias vingenere='python3 ~/Documents/repositories/tools/vingenere.py'
+alias tools='python3 ~/Documents/repositories/tools/tools.py'
 
 #other aliases
-alias ghidra='/home/alfred/Documents/ghidra_10.3_PUBLIC/ghidraRun'
+alias ghidra='~/Documents/ghidra_10.3_PUBLIC/ghidraRun'
 alias xclip='xclip -sel clip'
 
+xmodmap ~/.Xmodmap
