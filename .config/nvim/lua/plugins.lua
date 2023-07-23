@@ -2,9 +2,9 @@
 vim.cmd.packadd('packer.nvim')
 
 return require('packer').startup(function(use)
-    -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+    -- fuzzy finder
     use {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
@@ -14,6 +14,7 @@ return require('packer').startup(function(use)
         }
     }
 
+    -- style
     use({
         'rose-pine/neovim',
         as = 'rose-pine',
@@ -21,7 +22,11 @@ return require('packer').startup(function(use)
             vim.cmd('colorscheme rose-pine')
         end
     })
+
+    -- syntax highlighting
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+
+    -- undo history
     use('mbbill/undotree')
 
     use {
