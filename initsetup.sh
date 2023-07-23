@@ -6,12 +6,14 @@ declare -a configs=(".bashrc" ".config/nvim" ".tmux.conf" ".vimrc" ".Xmodmap" ".
 TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
 for config in ${configs[@]}; do
     FILE=${HOME}/$config
-    if test -f "$FILE" || test -d "$FILE"; then
-        mkdir -p backup/$TIMESTAMP
-        cp -r $FILE backup/$TIMESTAMP
-        echo $FILE alredy exist. Saved backup of file in ./backup
-        rm -rf $FILE
+    if test ! -L "$FILE"; then
+        if test -f "$FILE" || test -d "$FILE"; then
+            mkdir -p backup/$TIMESTAMP
+            cp -r $FILE backup/$TIMESTAMP
+            echo $FILE alredy exist. Saved backup of file in ./backup
+        fi
     fi
+    rm -rf $FILE
     ln -s ${PWD}/$config $FILE
 done
 
