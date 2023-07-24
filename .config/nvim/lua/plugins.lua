@@ -29,6 +29,17 @@ return require('packer').startup(function(use)
     -- undo history
     use('mbbill/undotree')
 
+
+    -- debugging
+    use {
+        "puremourning/vimspector",
+        cmd = { "VimspectorInstall", "VimspectorUpdate" },
+        fn = { "vimspector#Launch()", "vimspector#ToggleBreakpoint", "vimspector#Continue" },
+        config = function()
+            require("config.vimspector").setup()
+        end,
+    }
+
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
