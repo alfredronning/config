@@ -2,6 +2,66 @@
 
 declare -a configs=(".bashrc" ".config/nvim" ".tmux.conf" ".vimrc" ".Xmodmap" ".zshrc")
 
+# install git
+if [ $(dpkg-query -W -f='${Status}' git 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+    sudo apt install git
+fi
+# install python
+if [ $(dpkg-query -W -f='${Status}' python3-dev 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+    sudo apt install python3-dev
+fi
+# install pip
+if [ $(dpkg-query -W -f='${Status}' pip 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+    sudo apt install pip
+fi
+# install npm
+if [ $(dpkg-query -W -f='${Status}' npm 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+    sudo apt install npm
+fi
+# install cmake
+if [ $(dpkg-query -W -f='${Status}' cmake 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+    sudo apt install cmake
+fi
+# install thefuck
+if [ $(dpkg-query -W -f='${Status}' thefuck 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+    sudo apt install thefuck
+fi
+# install ripgrep
+if [ $(dpkg-query -W -f='${Status}' ripgrep 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+    sudo apt install ripgrep
+fi
+# install vim
+if [ $(dpkg-query -W -f='${Status}' vim 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+    sudo apt install vim
+fi
+# install neovim
+if [ $(dpkg-query -W -f='${Status}' neovim 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+    sudo add-apt-repository ppa:neovim-ppa/unstable
+    sudo apt update
+    sudo apt install neovim
+fi
+# install zsh
+if [ $(dpkg-query -W -f='${Status}' zsh 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+    sudo apt install zsh
+fi
+# set zsh as default shell
+chsh -s $(which zsh)
+
+# install pyright
+if [ `npm list -g | grep -c pyright` -eq 0 ]; then
+    sudo npm install -g pyright
+fi
+
 # create symlinks to configs in home
 TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
 for config in ${configs[@]}; do
@@ -17,16 +77,12 @@ for config in ${configs[@]}; do
     ln -s ${PWD}/$config $FILE
 done
 
-# install pyright
-if [ `npm list -g | grep -c pyright` -eq 0 ]; then
-    sudo npm install -g pyright
+# install vim plug
+if test ! -f ~/.vim/autoload/plug.vim; then
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs\
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
-
-# install ripgrep
-if [ $(dpkg-query -W -f='${Status}' ripgrep 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-    sudo apt install ripgrep
-fi
+vim +'PlugInstall --sync' +qa
 
 # install and sync nvim packer
 if test ! -d ~/.local/share/nvim/site/pack/packer; then
@@ -34,3 +90,8 @@ if test ! -d ~/.local/share/nvim/site/pack/packer; then
         ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 fi
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
+#set git global vars
+git config --global core.editor "vim"
+git config --global user.email "alfredronning@gmail.com"
+git config --global user.name "alfred"
