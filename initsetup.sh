@@ -1,59 +1,22 @@
 #!/bin/bash
 
 declare -a configs=(".bashrc" ".config/nvim" ".tmux.conf" ".vimrc" ".Xmodmap" ".zshrc")
+declare -a apt_packages=("git" "python3-dev" "pip" "npm" "cmake" "thefuck" "ripgrep" "vim" "zsh")
 
-# install git
-if [ $(dpkg-query -W -f='${Status}' git 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-    sudo apt install git
-fi
-# install python
-if [ $(dpkg-query -W -f='${Status}' python3-dev 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-    sudo apt install python3-dev
-fi
-# install pip
-if [ $(dpkg-query -W -f='${Status}' pip 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-    sudo apt install pip
-fi
-# install npm
-if [ $(dpkg-query -W -f='${Status}' npm 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-    sudo apt install npm
-fi
-# install cmake
-if [ $(dpkg-query -W -f='${Status}' cmake 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-    sudo apt install cmake
-fi
-# install thefuck
-if [ $(dpkg-query -W -f='${Status}' thefuck 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-    sudo apt install thefuck
-fi
-# install ripgrep
-if [ $(dpkg-query -W -f='${Status}' ripgrep 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-    sudo apt install ripgrep
-fi
-# install vim
-if [ $(dpkg-query -W -f='${Status}' vim 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-    sudo apt install vim
-fi
-# install neovim
+# install latest apt packages
+for apt_package in ${apt_packages[@]}; do
+    if [ $(dpkg-query -W -f='${Status}' ${apt_package} 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+        sudo apt install ${apt_package}
+    fi
+done
+# install neovim unstable
 if [ $(dpkg-query -W -f='${Status}' neovim 2>/dev/null | grep -c "ok installed") -eq 0 ];
 then
     sudo add-apt-repository ppa:neovim-ppa/unstable
     sudo apt update
     sudo apt install neovim
 fi
-# install zsh
-if [ $(dpkg-query -W -f='${Status}' zsh 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-    sudo apt install zsh
-fi
+
 # set zsh as default shell
 chsh -s $(which zsh)
 
@@ -61,6 +24,8 @@ chsh -s $(which zsh)
 if [ `npm list -g | grep -c pyright` -eq 0 ]; then
     sudo npm install -g pyright
 fi
+# install pynvim for vimspector to work on newer versions
+pip install pynvim
 
 # create symlinks to configs in home
 TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
